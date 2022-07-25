@@ -55,8 +55,24 @@ export class UsersPageComponent implements OnInit {
     this.setDataSource(this.users);
   }
 
-  addSelection(){
+  addSelection(row:any, event:any){
+    if(!(event.checked)){
+      console.warn(event);
+      this.removeSelection(row);
+      // return;
+    }
+    else{
+      this.selectedRows.add(row);
+    }
     
+    this.selection.toggle(row);
+    
+  }
+
+  removeSelection(row:any){
+    if(this.selectedRows.has(row)){
+      this.selectedRows.delete(row);
+    }
   }
 
   isAllSelected(){
@@ -102,6 +118,7 @@ export class UsersPageComponent implements OnInit {
     console.log(event);
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    // console.warn(this.dataSource, this.dataSource.data.length);
   }
 
   // deleteMany(ids:string[] | number[] | any)  [5,10,15,20]
@@ -121,7 +138,7 @@ export class UsersPageComponent implements OnInit {
   }
 
   get toggleDelete(): boolean{
-    return !(this.selection.selected.length>0 ? true : false);
+    return !(this.selection.selected.length > 0 ? true : false);
   }
 
   onPageChange(event:any){
@@ -130,7 +147,11 @@ export class UsersPageComponent implements OnInit {
 
   getCurrentPageData(){
     let skip = this.paginator?.pageSize * this.paginator?.pageIndex;
-    let pagedData = this.dataSource?.data.filter(
+    let source = this.dataSource?.data;
+    if(this.dataSource?.filteredData.length > 0){
+      source = this.dataSource.filteredData;
+    }
+    let pagedData = source?.filter(
       (u:any,i:any)=>{
         return i >= skip
       }).filter(
@@ -139,6 +160,23 @@ export class UsersPageComponent implements OnInit {
         }
       )
     return pagedData;  
+  }
+
+  editPerson(user:User, status:0 | 1 | -1, value?:any){
+
+    if(status===0){
+      user.edit = true;
+    }
+    if(status===-1){
+      user.edit = false;
+      console.log(document.getElementById("new-role"));
+    }
+    if(status===1){
+      user.edit = false;
+      console.warn("Submit form -> ", user);
+    }
+    console.log(user);
+    
   }
 }
 

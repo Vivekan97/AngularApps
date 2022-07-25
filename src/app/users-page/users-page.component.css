@@ -17,5 +17,5 @@ mat-paginator{
 }
 
 .selected-row{
-    background-color: whitesmoke;
+    background-color: lightgray;
 }
