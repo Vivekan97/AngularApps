@@ -1,0 +1,21 @@
+.mat-header-row {
+    background-color: wheat;
+    /* background-color: rgb(224, 168, 168); */
+    /* background-color: rgb(200, 200, 245); */
+    
+}
+
+.mat-row{
+    /* background-color: wheat; */
+    /* background-color: whitesmoke; */
+    /* background-color: rgb(200, 200, 245); */
+}
+
+mat-paginator{
+    /* background-color: rgb(200, 200, 245); */
+    background-color: whitesmoke;
+}
+
+.selected-row{
+    background-color: whitesmoke;
+}
