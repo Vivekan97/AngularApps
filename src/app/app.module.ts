@@ -13,6 +13,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { UsersService } from './_services/users-service.service';
 
 @NgModule({
   declarations: [
@@ -21,10 +23,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,
-    HttpClientModule, FormsModule, MatTooltipModule,
+    HttpClientModule, FormsModule, MatTooltipModule, MatProgressBarModule,
     MatTableModule, MatPaginatorModule, MatSortModule, MatCheckboxModule
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,21 +1,11 @@
-.mat-header-row {
+#users-table table  .mat-header-row {
     background-color: wheat;
-    /* background-color: rgb(224, 168, 168); */
-    /* background-color: rgb(200, 200, 245); */
-    
 }
 
-.mat-row{
-    /* background-color: wheat; */
-    /* background-color: whitesmoke; */
-    /* background-color: rgb(200, 200, 245); */
-}
-
-mat-paginator{
-    /* background-color: rgb(200, 200, 245); */
+#users-table mat-paginator  {
     background-color: whitesmoke;
 }
 
-.selected-row{
+#users-table table .selected-row    {
     background-color: lightgray;
 }
