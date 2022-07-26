@@ -5,7 +5,7 @@
     <div class="row my-2">
         <header>
             <div class="text-center text-danger">
-                <h2>ADMIN UI PAGE</h2>
+                <h2 >ADMIN UI PAGE</h2>
             </div>
         </header>
     </div>
@@ -15,7 +15,7 @@
             <button class="btn btn-lg rounded-pill bi bi-trash3-fill"
             [class.text-danger]="!toggleDelete"
             [class.text-dark]="toggleDelete"
-            [disabled]="toggleDelete" (click)="deleteMany()"
+            [disabled]="toggleDelete" (click)="deleteUsers()"
             matTooltip="delete selected"></button>
         </div>
         <div class="col-sm-4">
@@ -23,9 +23,9 @@
         </div>
     </div>
 
-    <div class="row mat-elevation-z8">
+    <div class="row mat-elevation-z8" id="users-table">
 
-        <table mat-table [dataSource]="dataSource">
+        <table mat-table [dataSource]="dataSource" >
 
             <!-- CheckBox Column -->
             <ng-container matColumnDef="select">
@@ -82,13 +82,11 @@
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let element">
                     <button *ngIf="!element?.edit" class="mx-1 btn btn-outline border-0 btn-sm rounded-pill bi bi-pencil-fill text-success" 
-                    (click)="editPerson(element, 0)" matTooltip="edit user"></button>
+                    (click)="editUser(element)" matTooltip="edit user"></button>
                     <button *ngIf="element?.edit" class="mx-1 btn btn-outline border-0 btn-sm rounded-pill bi bi-check-square-fill text-success"
-                     type="submit" (click)="editPerson(element,1)" matTooltip="save changes"></button>
-                    <!-- <button *ngIf="element?.edit" class="mx-1 btn btn-outline border-0 btn-sm rounded-pill bi bi-x-square-fill text-danger"
-                     type="reset" (click)="editPerson(element, -1)"></button> -->
+                     type="submit" (click)="editUser(element)" matTooltip="save changes"></button>
                     <button class="mx-1 btn btn-outline border-0 btn-sm rounded-pill bi bi-trash3-fill text-danger"
-                    (click)="removePerson(element.id)" matTooltip="delete user"></button>
+                    (click)="removeUser(element.id)" matTooltip="delete user"></button>
                 </td>
             </ng-container>
 
@@ -99,11 +97,22 @@
             <tr class="mat-row" *matNoDataRow>
                 <td class="mat-cell" colspan="4"> No Data </td>
             </tr>
-
+            
         </table>
-        <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons
-        (page)="onPageChange($event)"
-        aria-label="select page of users"></mat-paginator>
+        <ng-container *ngIf="errorFetching || loadingTable">
+            <table>
+                <tr *ngIf="loadingTable">
+                    <mat-progress-bar mode="buffer"></mat-progress-bar>
+                </tr>
+                <tr *ngIf="errorFetching" class="mat-row">
+                    <td collspan="4" class="mat-cell text-danger text-center">Failed getting users !</td>
+                </tr>
+            </table>    
+        </ng-container>
+
+            <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons
+        aria-label="select page of users" id="users-table-paginator"></mat-paginator>
+        
     </div >
 
     <div class="row my-4">
